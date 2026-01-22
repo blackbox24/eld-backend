@@ -3,6 +3,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from typing import cast
+from urllib.parse import parse_qsl, urlparse
 
 import redis
 from decouple import Csv, config
@@ -144,9 +145,9 @@ AUTHENTICATION_BACKENDS = [
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {}
-USE_SQLITE = config("USE_SQLITE")
-USE_MYSQL = config("USE_MYSQL")
-USE_POSTGRES = config("USE_POSTGRES")
+USE_SQLITE = config("USE_SQLITE", cast=bool)
+USE_MYSQL = config("USE_MYSQL", cast=bool)
+USE_POSTGRES = config("USE_POSTGRES", cast=bool)
 
 if USE_SQLITE:
     logger.info(f"USE_SQLITE: {USE_SQLITE}")
@@ -173,16 +174,18 @@ elif USE_MYSQL:
         }
     )
 elif USE_POSTGRES:
+    tmpPostgres = urlparse(config("DATABASE_URL", cast=str))  # pyright: ignore[reportArgumentType] # noqa: N816
     logger.info(f"USE_POSTGRES: {USE_POSTGRES}")
     DATABASES.update(
         {
             "default": {
-                "ENGINE": "django.db.backends.postgres",
-                "NAME": config("POSTGRES_NAME"),
-                "USER": config("POSTGRES_USERNAME"),
-                "HOST": config("POSTGRES_HOST"),
-                "PORT": config("POSTGRES_PORT"),
-                "PASSWORD": config("POSTGRES_PASSWORD"),
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": tmpPostgres.path.replace("/", ""),
+                "USER": tmpPostgres.username,
+                "PASSWORD": tmpPostgres.password,
+                "HOST": tmpPostgres.hostname,
+                "PORT": 5432,
+                "OPTIONS": dict(parse_qsl(tmpPostgres.query)),
             }
         }
     )
@@ -281,8 +284,20 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {"handlers": ["console", "file"], "level": "INFO", "propagate": True},
+        "django": {
+            "handlers": [
+                "console",
+            ],
+            "level": "INFO",
+            "propagate": True,
+        },
         # customize logs for apps
-        "*": {"handlers": ["console", "file"], "level": "INFO", "propagrate": True},
+        "*": {
+            "handlers": [
+                "console",
+            ],
+            "level": "INFO",
+            "propagrate": True,
+        },
     },
 }

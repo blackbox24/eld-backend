@@ -15,6 +15,8 @@ django==6.0.1
     #   django-cors-headers
     #   django-guardian
     #   django-redis
+    #   django-stubs
+    #   django-stubs-ext
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   drf-spectacular
@@ -25,6 +27,12 @@ django-guardian==3.2.0
     # via eld-backend
 django-redis==6.0.0
     # via eld-backend
+django-stubs==5.2.9
+    # via eld-backend
+django-stubs-ext==5.2.9
+    # via
+    #   django-stubs
+    #   eld-backend
 djangorestframework==3.16.1
     # via
     #   djangorestframework-simplejwt
@@ -50,6 +58,8 @@ packaging==26.0
     #   pytest
 pluggy==1.6.0
     # via pytest
+psycopg2-binary==2.9.11
+    # via eld-backend
 pygments==2.19.2
     # via pytest
 pyjwt==2.10.1
@@ -74,6 +84,14 @@ rpds-py==0.30.0
     #   referencing
 sqlparse==0.5.5
     # via django
+types-pyyaml==6.0.12.20250915
+    # via django-stubs
+typing-extensions==4.15.0
+    # via
+    #   django-guardian
+    #   django-stubs
+    #   django-stubs-ext
+    #   referencing
 tzdata==2025.3 ; sys_platform == 'win32'
     # via django
 uritemplate==4.2.0
