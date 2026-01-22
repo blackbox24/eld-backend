@@ -8,6 +8,8 @@ attrs==25.4.0
     # via
     #   jsonschema
     #   referencing
+colorama==0.4.6 ; sys_platform == 'win32'
+    # via pytest
 django==6.0.1
     # via
     #   django-cors-headers
@@ -36,14 +38,26 @@ gunicorn==23.0.0
     # via eld-backend
 inflection==0.5.1
     # via drf-spectacular
+iniconfig==2.3.0
+    # via pytest
 jsonschema==4.26.0
     # via drf-spectacular
 jsonschema-specifications==2025.9.1
     # via jsonschema
 packaging==26.0
-    # via gunicorn
+    # via
+    #   gunicorn
+    #   pytest
+pluggy==1.6.0
+    # via pytest
+pygments==2.19.2
+    # via pytest
 pyjwt==2.10.1
     # via djangorestframework-simplejwt
+pytest==9.0.2
+    # via pytest-django
+pytest-django==4.11.1
+    # via eld-backend
 python-decouple==3.8
     # via eld-backend
 pyyaml==6.0.3

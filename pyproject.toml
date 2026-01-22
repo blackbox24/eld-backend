@@ -13,5 +13,14 @@ dependencies = [
     "djangorestframework-simplejwt>=5.5.1",
     "drf-spectacular>=0.29.0",
     "gunicorn>=23.0.0",
+    "pytest-django>=4.11.1",
     "python-decouple>=3.8",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.13",
 ]
