@@ -1,0 +1,12 @@
+.env
+.env.prod
+.env.db.prod
+venv/
+__pycache__ 
+*/migrations/*.py
+
+*.pyc
+*.pyo
+*.log
+
+db.sqlite3
