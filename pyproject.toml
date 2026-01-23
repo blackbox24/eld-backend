@@ -13,6 +13,7 @@ dependencies = [
     "django-stubs-ext>=5.2.9",
     "djangorestframework>=3.16.1",
     "djangorestframework-simplejwt>=5.5.1",
+    "djangorestframework-stubs>=3.16.7",
     "drf-spectacular>=0.29.0",
     "gunicorn>=23.0.0",
     "psycopg2-binary>=2.9.11",
@@ -31,6 +32,7 @@ dev = [
 [tool.ruff]
 target-version = "py311"
 line-length = 100
+
 [tool.ruff.lint]
 select = [
     "E",      # pycodestyle errors
@@ -52,20 +54,23 @@ ignore = [
 
 
 [tool.ruff.lint.isort]
-known-first-party = ["clgc_web"]
+known-first-party = ["eld-backend"]
+
 [tool.mypy]
 python_version = "3.12"
-strict = true
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
 warn_redundant_casts = true
 warn_unused_ignores = true
-ignore_missing_imports = true
-explicit_package_bases = true
+check_untyped_defs = true
+disallow_untyped_defs = false # Crucial for gradual typing
+disallow_any_unimported = true
+no_implicit_optional = true
+
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]  # <-- New section for plugin-specific config
+django_settings_module = "config.settings"
+strict_settings = false
+
 
 [[tool.mypy.overrides]]
 module = "decouple"
@@ -73,4 +78,8 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "django.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "rest_framework"
 ignore_missing_imports = true
