@@ -14,6 +14,12 @@ GROUP_PERMISSIONS = {
         "change": ["driver", "admin"],
         "delete": ["admin"],
     },
+    "trip": {
+        "view": ["driver", "admin"],
+        "add": [
+            "driver",
+        ],
+    },
 }
 
 
@@ -77,6 +83,7 @@ class Command(BaseCommand):
     def get_app_label(self, model_name):
         mapping = {
             "customuser": "users",
+            "trip": "trip",
         }
         return mapping.get(model_name, "users")
 
