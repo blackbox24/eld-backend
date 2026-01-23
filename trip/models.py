@@ -19,6 +19,11 @@ class Trip(models.Model):
         indexes = [
             models.Index(
                 fields=("created_by",),
-            )
+            ),
+            models.Index(fields=["created_at"]),
         ]
+
         ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"Trip {self.pk} by {self.created_by.username}"
