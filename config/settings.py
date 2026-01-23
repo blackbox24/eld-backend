@@ -95,7 +95,7 @@ THIRD_PARTY_APPS = [
 # Custom apps
 CUSTOM_APPS = [
     # Add your custom apps here
-    "api",
+    "eld",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
