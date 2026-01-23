@@ -96,6 +96,7 @@ CUSTOM_APPS = [
     # Add your custom apps here
     "core",
     "users",
+    "trip",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
