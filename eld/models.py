@@ -6,6 +6,15 @@ class Trip(models.Model):
     Represents a single trip with its details.
     """
 
+    TRIP_STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("processed", "Processed"),
+        ("error_no_route", "Error: No Route Found"),
+        ("error_processing", "Error: Processing Failed"),
+        ("error_invalid_location", "Error: Invalid Location Data"),
+    ]
+
+    status = models.CharField(max_length=30, choices=TRIP_STATUS_CHOICES, default="pending")
     current_location = models.JSONField()
     pickup_location = models.JSONField()
     dropoff_location = models.JSONField()
@@ -21,6 +30,7 @@ class Trip(models.Model):
 
     class Meta:
         indexes = [
+            models.Index(fields=["status"]),
             models.Index(fields=["current_location"]),
             models.Index(fields=["pickup_location"]),
             models.Index(fields=["dropoff_location"]),

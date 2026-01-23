@@ -8,6 +8,7 @@ class TripSerializer(serializers.ModelSerializer):
         model = Trip
         fields = [
             "id",
+            "status",
             "current_location",
             "pickup_location",
             "dropoff_location",
@@ -17,7 +18,13 @@ class TripSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ["route_geometry", "route_waypoints", "created_at", "updated_at"]
+        read_only_fields = [
+            "status",
+            "route_geometry",
+            "route_waypoints",
+            "created_at",
+            "updated_at",
+        ]
 
 
 class ELDLogSerializer(serializers.ModelSerializer):

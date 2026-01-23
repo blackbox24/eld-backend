@@ -37,7 +37,6 @@ class RouteService:
                 profile="driving-hgv",  # HGV stands for Heavy Goods Vehicle (truck)
                 format="json",
                 validate=True,
-                extra_info=["way_points"],
             )
 
             if routes and routes["routes"]:
@@ -45,13 +44,12 @@ class RouteService:
                 route_geometry = routes["routes"][0]["geometry"]
                 route_duration = route_summary["duration"]  # in seconds
                 route_distance = route_summary["distance"]  # in meters
-                # waypoints = routes['routes'][0].get('way_points', []) # This might be useful later
 
                 return {
                     "distance_meters": route_distance,
                     "duration_seconds": route_duration,
                     "geometry": route_geometry,  # GeoJSON LineString
-                    "waypoints": routes["routes"][0].get("segments", [{}])[0].get("steps", []),
+                    # "waypoints": routes['routes'][0].get('segments', [{}])[0].get('steps', []), # Removed waypoints
                 }
             return None
 
