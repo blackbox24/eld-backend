@@ -97,6 +97,7 @@ CUSTOM_APPS = [
     "core",
     "users",
     "trip",
+    "logsheet",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
