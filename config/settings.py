@@ -49,6 +49,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -94,11 +95,7 @@ THIRD_PARTY_APPS = [
 # Custom apps
 CUSTOM_APPS = [
     # Add your custom apps here
-    "core",
-    "users",
-    "trip",
-    "logsheet",
-    "stops",
+    "api",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
@@ -145,8 +142,6 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "guardian.backends.ObjectPermissionBackend",
 ]
-
-AUTH_USER_MODEL = "users.CustomUser"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {}
