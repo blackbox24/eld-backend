@@ -6,7 +6,7 @@ from typing import cast
 from urllib.parse import parse_qsl, urlparse
 
 import redis
-from decouple import config
+from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +24,7 @@ SECRET_KEY = config("SECRET_KEY", cast=str)
 DEBUG = config("DEBUG", cast=bool, default=False)
 logger.info("DEBUG: " + str(DEBUG))
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [config("ALLOWED_HOSTS", cast=Csv())]
 logger.info("ALLOWED_HOSTS: " + str(ALLOWED_HOSTS))
 
 # APPLICATION SECURITY
@@ -36,7 +36,9 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", cast=bool, default=False)
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", cast=bool, default=True)
 CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", cast=bool, default=True)
-# CSRF_TRUSTED_ORIGINS = ["*"]
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")], default=[]
+)
 
 
 REST_FRAMEWORK = {
@@ -68,7 +70,7 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-CORS_ALLOWED_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 
 # Application definition
 DJANGO_APPS = [
