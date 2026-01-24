@@ -18,6 +18,7 @@ dependencies = [
     "gunicorn>=23.0.0",
     "openrouteservice>=2.3.3",
     "pillow>=12.1.0",
+    "psycopg2-binary>=2.9.11",
     "pytest-django>=4.11.1",
     "python-decouple>=3.8",
 ]

@@ -72,6 +72,8 @@ pillow==12.1.0
     # via eld-backend
 pluggy==1.6.0
     # via pytest
+psycopg2-binary==2.9.11
+    # via eld-backend
 pygments==2.19.2
     # via pytest
 pyjwt==2.10.1
