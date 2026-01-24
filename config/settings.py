@@ -286,7 +286,7 @@ LOGGING = {
             "propagate": True,
         },
         # customize logs for apps
-        "*": {
+        "eld.views": {
             "handlers": [
                 "console",
             ],

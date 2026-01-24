@@ -49,7 +49,9 @@ class RouteService:
                     "distance_meters": route_distance,
                     "duration_seconds": route_duration,
                     "geometry": route_geometry,  # GeoJSON LineString
-                    # "waypoints": routes['routes'][0].get('segments', [{}])[0].get('steps', []), # Removed waypoints
+                    "waypoints": routes["routes"][0]
+                    .get("segments", [{}])[0]
+                    .get("steps", []),  # Removed waypoints
                 }
             return None
 

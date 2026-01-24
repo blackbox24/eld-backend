@@ -19,7 +19,7 @@ class Trip(models.Model):
     pickup_location = models.JSONField()
     dropoff_location = models.JSONField()
     current_cycle_used = models.DecimalField(max_digits=4, decimal_places=2, help_text="in hours")
-    route_geometry = models.JSONField(
+    route_geometry = models.TextField(
         blank=True, null=True, help_text="GeoJSON LineString of the calculated route"
     )
     route_waypoints = models.JSONField(
