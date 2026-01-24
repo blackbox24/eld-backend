@@ -2,10 +2,8 @@ import logging
 import os
 from datetime import timedelta
 from pathlib import Path
-from typing import cast
 from urllib.parse import parse_qsl, urlparse
 
-import redis
 from decouple import Csv, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -192,33 +190,7 @@ elif USE_POSTGRES:
 else:
     logger.error("No Database configured")
 
-# REDIS
-REDIS_HOST = cast(
-    "str",
-    config(
-        "REDIS_HOST",
-        cast=str,
-        default="localhost",
-    ),
-)
 
-REDIS_PORT = config("REDIS_PORT", cast=int, default=6379)
-
-
-try:
-    redis_connection = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0)
-
-    logger.info("Redis connection: sucessful")
-except redis.RedisError as e:
-    logger.error("Failed to connect to redis server: " + str(e))
-
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/0",
-    }
-}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

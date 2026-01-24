@@ -22,6 +22,7 @@ django==6.0.1
     #   django-stubs
     #   django-stubs-ext
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-spectacular
     #   eld-backend
 django-cors-headers==4.9.0
@@ -40,8 +41,11 @@ django-stubs-ext==5.2.9
     #   eld-backend
 djangorestframework==3.16.1
     # via
+    #   djangorestframework-simplejwt
     #   drf-spectacular
     #   eld-backend
+djangorestframework-simplejwt==5.5.1
+    # via eld-backend
 djangorestframework-stubs==3.16.7
     # via eld-backend
 drf-spectacular==0.29.0
@@ -70,6 +74,8 @@ pluggy==1.6.0
     # via pytest
 pygments==2.19.2
     # via pytest
+pyjwt==2.10.1
+    # via djangorestframework-simplejwt
 pytest==9.0.2
     # via pytest-django
 pytest-django==4.11.1
