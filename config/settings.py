@@ -24,7 +24,7 @@ SECRET_KEY = config("SECRET_KEY", cast=str)
 DEBUG = config("DEBUG", cast=bool, default=False)
 logger.info("DEBUG: " + str(DEBUG))
 
-ALLOWED_HOSTS = [config("ALLOWED_HOSTS", cast=Csv())]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 logger.info("ALLOWED_HOSTS: " + str(ALLOWED_HOSTS))
 
 # APPLICATION SECURITY
